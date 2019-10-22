@@ -11,6 +11,7 @@ def tagMatchRules = [
     ]
   ]
 ]
+
 pipeline {
   parameters {
     string(name: 'APP_NAME', defaultValue: '', description: 'The name of the service to deploy.', trim: true)
@@ -42,6 +43,7 @@ pipeline {
         }
       }
     }
+    // DO NOT uncomment until 06_04 Lab
     stage('DT Deploy Event') {
       steps {
         container("curl") {
@@ -58,6 +60,8 @@ pipeline {
         }
       }
     }
+    // DO NOT uncomment until 10_01 Lab
+    /*
     stage('Staging Warm Up') {
       steps {
         echo "Waiting for the service to start..."
@@ -97,6 +101,7 @@ pipeline {
         sleep 60
       }
     }
+
     stage('Run production ready e2e check in staging') {
       steps {
         recordDynatraceSession (
